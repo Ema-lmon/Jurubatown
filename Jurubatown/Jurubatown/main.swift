@@ -22,7 +22,7 @@ print("Para conhecer nosso castelo, digite 1. Para explorar nossa floresta miste
 let visitaString = readLine() ?? "1"
 let visita = Int(visitaString)
 
-escolherPath(visitaEscolhida: visita ?? 1)
+escolherPath(visitaEscolhida: visita ?? 3)
 
 //Escolher entre castelo ou floresta
 func escolherPath (visitaEscolhida: Int) {
@@ -31,6 +31,7 @@ func escolherPath (visitaEscolhida: Int) {
         explorarCastelo()
     } else if visitaEscolhida == 2 {
         explorarFloresta() }
+    else { print("A indecisão te levou para fora de Jurubatown. Você está destinado a viver em São Paulo.")}
     }
 
 
@@ -78,41 +79,43 @@ func missaoEquipamento () {
 }
 
 //3 MISSÃO DERROTAR DRAGÃO
-    func derrotarDragao () {
-        print("A cada 6 meses, o dragão Vader desperta da sua soneca semestral.")
-        print("Pressione 1 para atacar com sua espada milenar ou 2 para fugir")
+func derrotarDragao () {
+    print("A cada 6 meses, o dragão Vader desperta da sua soneca semestral.")
+    print("Pressione 1 para atacar com sua espada milenar ou 2 para fugir")
+    
+    let acao = readLine() ?? "2"
+    
+    switch acao {
+    case "1":
         
-        let acao = readLine() ?? "2"
-        
-        switch acao {
-        case "1":
-            
         diamantes += 100
-            print("O dragão Vader foi derrotado! Sua bravura foi recompensada com 100 diamantes 💎 ")
-            print("Sua exploração no castelo chegou ao fim! Digite 1 para conhecer o lado mais selvagem do nosso reino ou digite 2 para encerrar sua jornada")
-            
-            let choosePath = readLine() ?? "2"
-            let choose = Int(choosePath)
+        print("O dragão Vader foi derrotado! Sua bravura foi recompensada com 100 diamantes 💎 ")
+        print("Sua exploração no castelo chegou ao fim! Digite 1 para conhecer o lado mais selvagem do nosso reino ou digite 2 para encerrar sua jornada")
         
-            if choose == 1 {
-                explorarFloresta()
-            }
-            if choose == 2 {
-                print("Obrigada por visitar o reino de Jurubatown. Foi uma honra")}
-                
-            }
-        case "2":
-            print("Você decide recuar por enquanto. O dragão poderá voltar a qualquer momento...")
-            print("Digite 'Floresta' para conhecer o lado mais selvagem do nosso reino.")
-            
-            let choosePath1 = readLine()
-            
-            if choosePath1 == "Floresta" {
-                explorarFloresta()
-            } default:
-            print("A indecisão é perigosa...Tente novamente.")
-            derrotarDragao()
+        let choosePath = readLine() ?? "2"
+        let choose = Int(choosePath)
+        
+        if choose == 1 {
+            explorarFloresta()
         }
+        if choose == 2 {
+            print("Obrigada por visitar o reino de Jurubatown. Foi uma honra")}
+        
+        
+    case "2":
+        print("Você decide recuar por enquanto. O dragão poderá voltar a qualquer momento...")
+        print("Digite 'Floresta' para conhecer o lado mais selvagem do nosso reino.")
+        
+        let choosePath1 = readLine()
+        
+        if choosePath1 == "Floresta" {
+            explorarFloresta()
+        } default:
+        print("A indecisão é perigosa...Tente novamente.")
+        derrotarDragao()
+    }
+}
+
     
 
 
@@ -122,8 +125,8 @@ func missaoEquipamento () {
 func explorarFloresta() {
     print("Você está na Floresta encantada. Aqui nós cultivamos ervas poderosas e colhê-las te recompensará com alguns diamantes. Para continuar, digite 1. Caso queira explorar o castelo, digite 2")
     
-    var colherStr = readLine() ?? ""
-    var colher = Int (colherStr)
+    let colherStr = readLine() ?? ""
+    let colher = Int (colherStr)
     
     if colher == 1 {
         colherErvas()
@@ -142,15 +145,15 @@ func colherErvas () {
     let ervasString = readLine() ?? "0"
     let ervas = Int(ervasString) ?? 0
     
-    arrancarErvas(qtdEncontrada: ervas)
-    
     enum ErroMissao: Error {
         case quantidadeInsuficiente
     }
     
     func arrancarErvas(qtdEncontrada: Int) throws {
+        
         if qtdEncontrada < 3 {
             throw ErroMissao.quantidadeInsuficiente
+            
         } else {
             print("Você colheu \(qtdEncontrada) ervas! Missão concluída!")
             print("Casso queira conhecer nosso castelo, digite 1. Caso queira encerrar sua jornada, digite 2")
@@ -160,6 +163,7 @@ func colherErvas () {
             
             if escolha == 1 {
                 explorarCastelo()
+                
             } else if escolha == 2 {
                 print("Obrigada por visitar o reino de Jurubatown. Foi uma honra")}
             
